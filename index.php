@@ -39,8 +39,15 @@ and open the template in the editor.
     
     <script>
         $("#prisolicitud").on( "click", function( event ) {
+            if(($("#subsolicitud").css("display")!="none")){
+                 $("#subsolicitud").css("display","none");
+            }
+            else{
                 $("#subsolicitud").show();
                 $("#subsolicitud").css("display","block");
+            }
+                
+                
             });
         
         $('[data-toggle="tooltip"]').tooltip(); 

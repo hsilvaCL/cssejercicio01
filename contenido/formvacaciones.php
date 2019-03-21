@@ -1,6 +1,6 @@
 <?php
-include('../lib/constantes.php');
 include('../lib/vacaciones.php');
+include('../lib/constantes.php');
 
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ and open the template in the editor.
             <div id="titulo"></div>
             <div id="menu"><?php include('../menu.php');?></div>
                     <div id="contenido">
-                        <form class="vacaciones form-horizontal" action="../lib/recepcionvacaciones.php" method="get">
+                        <form class="vacaciones form-horizontal" action="../lib/recepcionvacaciones.php" method="post">
                             <div class="form-group"> 
                                 <label class="col-sm-2 control-label">Rut:</label> 
                                 <div class="col-sm-10">
@@ -41,16 +41,54 @@ and open the template in the editor.
                             <br>Comentario<textarea id="comentario" rows="7" cols=20>   </textarea>
                             <input type="submit" value="Enviar"  >                     
                         </form>
+                        <form class="vacaciones form-horizontal" action="../lib/eliminar.php" method="post">
+                            <div class="form-group"> 
+                                <label class="col-sm-2 control-label">Rut:</label> 
+                                <div class="col-sm-10">
+                                    <input class="form-control input-sm" id="eliminarut" name="rut" type="text">
+                                </div>
+                           
+                                <input id="btneliminar" type="button" value="Eliminar"  >   
+                            </div>
+                        </form>
                     </div>
+            
+            
+                
+                   
         </div>
         <pre>
         <?php
-        var_dump($_SESSION["regvacacion"]);
+            echo "<pre>";
+            var_dump($_SESSION["aVacaciones"]);
+            echo "</pre>";
+            
+            foreach ($_SESSION["aVacaciones"] as $key => $oVacacion) {
+                if ($oVacacion->getRut()==3){
+                    unset($_SESSION["aVacaciones"][$key]);
+                }
+            }
+                       
+           /* for ($i=0;$i< count($_SESSION["aVacaciones"]);$i++) {
+                $oVacacion=$_SESSION["aVacaciones"][$i];
+            if ($oVacacion->getRut()==1){
+                unset($_SESSION["aVacaciones"][$i]);
+            }
+            }*/
+            
         ?>
         </pre>
+        <div id="resultado"></div>
     </body>
     
     <script>
+        $("#btneliminar").on( "click", function( event ) {
+           $.post( "../lib/eliminar.php", { rut:  $("#eliminarut").value() }, function( data ) {
+                $( "#resultado" ).html( data );
+              });
+           
+            });
+            
         $("#subsolicitud").show();
         $("#subsolicitud").addClass("active");
         $("#subsolicitud").css("display","block");

@@ -39,12 +39,12 @@ and open the template in the editor.
     
     <script>
         $("#prisolicitud").on( "click", function( event ) {
-            if(($("#subsolicitud").css("display")!="none")){
-                 $("#subsolicitud").css("display","none");
+            if(($("[id*=subsolicitud]").css("display")!="none")){
+                 $("[id*=subsolicitud]").css("display","none");
             }
             else{
-                $("#subsolicitud").show();
-                $("#subsolicitud").css("display","block");
+                $("[id*=subsolicitud]").show();
+                $("[id*=subsolicitud]").css("display","block");
             }
                 
                 

@@ -60,7 +60,7 @@ and open the template in the editor.
                                 <td>Fecha Fin</td>
                                 <td>Días</td>
                                 <td>Comentario</td>
-                                <td><input type="button" value="Eliminar"></td>
+                                <td><input type="button" value="Eliminar" onclick="javascript:feliminar(<?=$oVacacion->getRut();?>);"></td>
                               </tr>
                                <?php }?>
                             </tbody>
@@ -69,9 +69,16 @@ and open the template in the editor.
 
         </div>
         <div id="resultado"></div>
+        <form id="formelimina" action="../lib/eliminar.php" method="post">
+            <input type="hidden" name="rut" id="rut">
+        </form>
     </body>
     
     <script>
+        function feliminar(id){
+           $("#rut").val(id);
+           $("#formelimina").submit();
+        }
         $("#btneliminar").on( "click", function( event ) {
            $.post( "../lib/eliminar.php", { rut:  $("#eliminarut_jq").value() }, function( data ) {
                 $( "#resultado" ).html( data );

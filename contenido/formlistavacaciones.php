@@ -2,6 +2,12 @@
 include('../lib/vacaciones.php');
 include('../lib/constantes.php');
 
+if(isset($_SESSION["aVacaciones"])){
+    $arrVacaciones=$_SESSION["aVacaciones"];    
+}
+ else {
+     $arrVacaciones="";
+}
 ?>
 <!DOCTYPE html>
 <!--
@@ -27,7 +33,38 @@ and open the template in the editor.
             <div id="titulo"></div>
             <div id="menu"><?php include('../menu.php');?></div>
                     <div id="contenido">
-                      
+                                               
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>Rut</th>
+                                <th>Nombre</th>
+                                <th>Cargo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Días</th>
+                                <th>Comentario</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                foreach ($arrVacaciones as $key => $oVacacion) {
+                                ?>
+                                <tr>
+                                <td>#<?=$key +1;?></td>
+                                <td><?=$oVacacion->getRut();?></td>
+                                <td><?=$oVacacion->getNombre();?></td>
+                                <td>Cargo</td>
+                                <td>Fecha Inicio</td>
+                                <td>Fecha Fin</td>
+                                <td>Días</td>
+                                <td>Comentario</td>
+                                <td><input type="button" value="Eliminar"></td>
+                              </tr>
+                               <?php }?>
+                            </tbody>
+                </table>
                     </div>
 
         </div>

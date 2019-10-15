@@ -36,13 +36,13 @@ a:hover{
 }
 #menu{
     width: 30%;
-    height: 500px;
+    height: 800px;
     float: left;
     background: green;
 }
 #contenido{
    width: 70%;
-   height: 500px; 
+   height: 800px; 
    float: left;
    background: yellow;
 }
